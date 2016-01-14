@@ -88,12 +88,14 @@ Message.prototype.hide = function (fn) {
   }.bind(this), Message.speed);
 };
 
-Message.prototype.button = function (name, fn) {
+Message.prototype.button = function (name, fn, keepHideEvent) {
   var button = document.createElement('button');
   button.innerHTML = name;
   button.className = prefix + '__button';
   this.element.children[0].appendChild(button);
-  this.element.removeEventListener('click', this.hide, false);
+  if (!keepHideEvent) {
+    this.element.removeEventListener('click', this.hide, false);
+  }
   Message.reposition();
 
   button.addEventListener('click', function () {
