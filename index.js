@@ -82,7 +82,9 @@ Message.prototype.hide = function (fn) {
   Message.reposition();
 
   setTimeout(function () {
-    this.element.parentNode.removeChild(this.element);
+    if (this.element.parentNode) {
+      this.element.parentNode.removeChild(this.element);
+    }
   }.bind(this), Message.speed);
 };
 
